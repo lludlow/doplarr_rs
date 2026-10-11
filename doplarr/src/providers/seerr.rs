@@ -40,6 +40,7 @@ fn log_api_error<T: std::fmt::Debug>(err: &SeerrApiError<T>, context: &str) {
     }
 }
 
+/// Log the API error details, then convert to anyhow for propagation.
 fn api_error<E>(err: SeerrApiError<E>, context: &str) -> anyhow::Error
 where
     E: std::fmt::Debug + Send + Sync + 'static,
@@ -56,7 +57,6 @@ where
     }
 }
 
-/// Log the API error details, then convert to anyhow for propagation.
 const ENRICHED_KEY: &str = "seerr:enriched";
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
